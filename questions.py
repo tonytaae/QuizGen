@@ -16,14 +16,27 @@
 # }
 
 # quiz type (dict) : 
-# {"name" : questionInfos}
+# {"id" : questionInfos}
 
 # Assuming we are working with only one quiz without any possibilty to
 # switch to another quiz
 quiz = {}
+questionId = 1
 
-def addQuestion(name, description, text, qtype, answers, feedback, points) :
-    quiz[name] = {"description" : description,
+def addQuestion(description, text, qtype, answers, feedback, points) :
+    global questionId
+    
+    quiz[str(questionId)] = {"description" : description,
+        "text" : text, 
+        "qtype" : qtype,
+        "answers" : answers,
+        "feedback" : feedback,
+        "points" : points
+        }
+    questionId += 1
+
+def modifyQuestion(id, description, text, qtype, answers, feedback, points) :
+    quiz[id] = {"description" : description,
         "text" : text, 
         "qtype" : qtype,
         "answers" : answers,
@@ -31,11 +44,8 @@ def addQuestion(name, description, text, qtype, answers, feedback, points) :
         "points" : points
         }
 
-def modifyQuestion(name, description, text, qtype, answers, feedback, points) :
-    addQuestion(name, description, text, qtype, answers, feedback, points)
-
-def deleteQuestion(name) :
-    del quiz[name]
+def deleteQuestion(id) :
+    del quiz[id]
 
 # for testing only
 def printQuiz():

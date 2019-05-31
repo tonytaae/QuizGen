@@ -48,8 +48,7 @@ while True :
         break
 
 clearScreen()
-addQuestion("q01",
-            "Conversion de base en base",
+addQuestion("Conversion de base en base",
             "Quelle est la couleur du cheval banc de Henri IV ?",
             "qcm",
             [{"text" : "bleu", "fraction" : 0},
@@ -60,8 +59,7 @@ addQuestion("q01",
             1
             )
 
-addQuestion("q02",
-            "Conversion de base en base",
+addQuestion("Conversion de base en base",
             "3 + 2 = ?",
             "qcm",
             [{"text" : "3", "fraction" : 0},
@@ -72,8 +70,7 @@ addQuestion("q02",
             1
             )
 
-addQuestion("q03",
-            "Conversion de base en base",
+addQuestion("Conversion de base en base",
             "0 + 0 = ?",
             "qcm",
             [{"text" : "0", "fraction" : 50},
@@ -85,9 +82,9 @@ addQuestion("q03",
             )
 
 printQuiz()
-deleteQuestion("q02")
+deleteQuestion("2")
 printQuiz()
-modifyQuestion("q01",
+modifyQuestion("1",
                "Question bête",
                "Quelle est la couleur du cheval blanc d'Henri IV ?",
                "qcm",
