@@ -108,7 +108,7 @@ while True :
                                 displayOptions)
         if addChoice == 1 : # Display all questions text
             printQuiz()
-            input("Appuyer sur une touche")
+            input('Appuyer sur une touche')
         elif addChoice == 2 : # Display chosen questions text
             pass
         else : # back to the main menu
@@ -125,9 +125,12 @@ while True :
     elif choice == 6 :
         saveQuizToFile()
     else : # Quit
-        if (isModified 
+        if (isQuizModified()
             and 
             input("Des changements ont été faits. Voulez-vous les enregistrer (o / n) ? ") == 'o') :
             saveQuizToFile()
         break
+
+
+
 
