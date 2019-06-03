@@ -107,10 +107,17 @@ while True :
         addChoice = displayMenu('Affichage d\'énoncés de questions', 
                                 displayOptions)
         if addChoice == 1 : # Display all questions text
+            clearScreen()
+            print('Affichage de toutes les questions: \n')
             printQuiz()
             input('Appuyer sur une touche')
         elif addChoice == 2 : # Display chosen questions text
-            pass
+            clearScreen()
+            print('Affichage de questions:')
+            print('Utiliser le format suivant pour afficher les questions 1, 2 et 9: 1,8,9')
+            numbers = input('Entrer les numéros:')            
+            printQuizPlus(numbers)            
+            input('Appuyer sur une touche')     
         else : # back to the main menu
             pass
     elif choice == 5 : # export questions to web page
