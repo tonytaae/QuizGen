@@ -24,6 +24,13 @@ def clearScreen() :
         system("cls")
     else : # for mac and linux
         system("clear")
+        
+#def clearScreen():
+#   if name == 'nt':
+#      _ = system('cls')
+#   # for mac and linux(here, os.name is 'posix')
+#   else:
+#      _ = system('clear')
 
 def inputInt(prompt) :
     while True :
