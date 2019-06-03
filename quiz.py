@@ -100,4 +100,28 @@ def printQuiz():
             print("{:d}. {:s}".format(number, answer['text']))
             number += 1
         print('\n')
+       
+def isNumber(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
         
+def printQuizPlus(numbers):
+    for elt in numbers:
+        if elt!=',' and isNumber(elt):              
+            for key, value in quiz.items():
+                if key==int(elt):
+                    questionTitle = 'Question id ' + str(key) + ' (' + str(value['points']) + ' point(s))'
+                    print(questionTitle)
+                    print('=' * len(questionTitle))
+                    print(value['text'])
+                    number = 1
+                    for answer in value['answers'] :
+                        if answer['fraction']!=0:       
+                            print("    {:d}. {:s} ({:d})".format(number, answer['text'], answer['fraction']))
+                        else:
+                                print("    {:d}. {:s}".format(number, answer['text']))
+                                number += 1
+                    print('\n')
