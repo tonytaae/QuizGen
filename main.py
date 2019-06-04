@@ -80,16 +80,15 @@ exportOptions = ['Exporter toutes les questions',
 loadQuizFromFile()
 
 while True :
-    
-    clearScreen()
-    choice = displayMenu('Création d\'un questionnaire', mainOptions)
-    
-    if choice == 1 : # Add a question
+
+    choice = showMenu('Création d\'un questionnaire', mainOptions)
+
+    if choice == 0 : # Add a question
         clearScreen()
-        addChoice = displayMenu('Ajout d\'une nouvelle question', addOptions)
-        if addChoice == 1 :
+        choice = showMenu('Ajout d\'une nouvelle question', addOptions)
+        if choice == 0 :
             print('Ajouter une question QCM et toutes les réponses:')
-            print('--------- Exemple ----------')            
+            print('--------- Exemple ----------')
             print('Description:Addition \ntype:qcm')
             print('Question:1+1=? \n     Réponse:2   fraction:50\n     Réponse:3   fraction:0\n     Réponse:2.0 fraction:50')
             print('Aide: deux\npoint:1')
@@ -98,30 +97,30 @@ while True :
             qtype=input('Type:')
             qtext=input('Question:')
             lansw=[]
-            again='o'            
+            again='o'
             while again!='n':
                 nextanwser=1
                 rtext=input('Réponse:')
                 fraction=int(input('Fraction:'))
                 lansw.append({'text': rtext, 'fraction' : fraction})
-                again=input('Ajouter une autre réponse? o/n: ')            
+                again=input('Ajouter une autre réponse? o/n: ')
             feedback=input('Aide:')
             points=float(input('points:'))
             addQuestion(description, qtext, qtype, lansw, feedback, points)
-            printQuiz()    
+            printQuiz()
             print(lanw)
-        elif addChoice == 2 :
+        elif choice == 1 :
             pass
-        elif addChoice == 3 :
+        elif choice == 2 :
             pass
         else : # back to the main menu
             pass
-    elif choice == 2 : # Edit a question
+    elif choice == 1 : # Edit a question
         # display all the questions and answers first
         # then ask for the chosen id
         printQuiz()
         key=input('Entrer l\'id de la question:')
-        printQuizMore(key)       
+        printQuizMore(key)
         print('Entrer les nouvelles valeurs:')
         description=input('Description:')
         qtype=input('Type:')
@@ -132,51 +131,44 @@ while True :
         for elt in range(len(quiz[id]['answers'])):
             rtext=input('Réponse '+str(number)+':')
             fraction=int(input('Fraction:'))
-            lansw.append({'text': rtext, 'fraction': fraction})   
-            number+=1                  
+            lansw.append({'text': rtext, 'fraction': fraction})
+            number+=1
         feedback=input('Aide:')
         points=float(input('points:'))
         modifyQuestion(id, description, qtext, qtype, lansw, feedback, points)
         printQuizPlus(key)
-    elif choice == 3 : # Remove a question
+    elif choice == 2 : # Remove a question
         printQuiz()
         key=int(input('Entrer l\'id de la question:'))
         deleteQuestion(key)
-    elif choice == 4 : # Display chosen questions
-        clearScreen()
-        addChoice = displayMenu('Affichage d\'énoncés de questions', displayOptions)
-        if addChoice == 1 : # Display all questions text
-            clearScreen()
+    elif choice == 3 : # Display chosen questions
+        choice = showMenu('Affichage d\'énoncés de questions', displayOptions)
+        if choice == 0 : # Display all questions text
             print('Affichage de toutes les questions: \n')
             printQuiz()
             input('Appuyer sur une touche')
-        elif addChoice == 2 : # Display chosen questions text
+        elif choice == 1 : # Display chosen questions text
             clearScreen()
             print('Affichage de questions:')
             print('Utiliser le format suivant pour afficher les questions 1, 2 et 9: 1,8,9')
-            numbers = input('Entrer les numéros:')            
-            printQuizPlus(numbers)            
-            input('Appuyer sur une touche')     
+            numbers = input('Entrer les numéros:')
+            printQuizPlus(numbers)
+            input('Appuyer sur une touche')
         else : # back to the main menu
             pass
-    elif choice == 5 : # export questions to web page
-        clearScreen()
-        addChoice = displayMenu('Export de questions', exportOptions)
-        if addChoice == 1 : # Export all questions
+    elif choice == 4 : # export questions to web page
+        choice = showMenu('Export de questions', exportOptions)
+        if choice == 0 : # Export all questions
             pass
-        elif addChoice == 2 : # Export chosen questions
+        elif choice == 1 : # Export chosen questions
             pass
         else : # back to the main menu
             pass
-    elif choice == 6 :
+    elif choice == 5 :
         saveQuizToFile()
     else : # Quit
         if (isQuizModified()
-            and 
+            and
             input("Des changements ont été faits. Voulez-vous les enregistrer (o / n) ? ") == 'o') :
             saveQuizToFile()
         break
-
-
-
-
