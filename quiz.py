@@ -90,7 +90,12 @@ def saveQuizToFile() :
 # for testing only
 def printQuiz():
     for key, value in quiz.items() :
-        questionTitle = 'Question id ' + str(key) + ' (' + str(value['points']) + ' point(s))'
+        id=int(key)
+        point=quiz[id]['points']
+        if point>1:            
+            questionTitle = 'Question id ' + str(id) + ' (' + str(point) + ' points)'
+        else:
+            questionTitle = 'Question id ' + str(id) + ' (' + str(point) + ' point)'  
         print(questionTitle)
         print('=' * len(questionTitle), '\n')
         print(value['text'], '\n')
@@ -107,6 +112,24 @@ def isNumber(s):
         return True
     except ValueError:
         return False
+
+def printQuizMore(numbers):
+    numbers=numbers.split(',')
+    for key in numbers:
+        id=int(key)
+        print('Description: ' + quiz[id]['description'])  
+        print('Type: ' + quiz[id]['qtype'])  
+        print('Question: ' + quiz[id]['text'])     
+        number = 1
+        for answer in quiz[id]['answers'] :
+            if answer['fraction']!=0:       
+                print("Réponse {:d}: {:s} (Fraction:{:d})".format(number, answer['text'], answer['fraction']))
+            else:
+                print("Réponse {:d}: {:s}".format(number, answer['text']))
+            number += 1
+        print('Feedback:' + quiz[id]['feedback'])  
+        print('Points:' + str(quiz[id]['points']))            
+        print('\n')         
     
 def printQuizPlus(numbers):
     numbers=numbers.split(',')
