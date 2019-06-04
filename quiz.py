@@ -112,7 +112,11 @@ def printQuizPlus(numbers):
     numbers=numbers.split(',')
     for key in numbers:
         id=int(key)
-        questionTitle = 'Question id ' + str(id) + ' (' + str(quiz[id]['points']) + ' point(s))'
+        point=quiz[id]['points']
+        if point>1:            
+            questionTitle = 'Question id ' + str(id) + ' (' + str(point) + ' points)'
+        else:
+            questionTitle = 'Question id ' + str(id) + ' (' + str(point) + ' point)' 
         print(questionTitle)
         print('=' * len(questionTitle))
         print(quiz[id]['text'])
@@ -122,5 +126,5 @@ def printQuizPlus(numbers):
                 print("    {:d}. {:s} ({:d})".format(number, answer['text'], answer['fraction']))
             else:
                 print("    {:d}. {:s}".format(number, answer['text']))
-                number += 1
+            number += 1
         print('\n')   
