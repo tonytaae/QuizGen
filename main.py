@@ -88,7 +88,28 @@ while True :
         clearScreen()
         addChoice = displayMenu('Ajout d\'une nouvelle question', addOptions)
         if addChoice == 1 :
-            pass
+            print('Ajouter une question QCM et toutes les réponses:')
+            print('--------- Exemple ----------')            
+            print('Description:Addition \ntype:qcm')
+            print('Question:1+1=? \n     Réponse:2   fraction:50\n     Réponse:3   fraction:0\n     Réponse:2.0 fraction:50')
+            print('Aide: deux\npoint:1')
+            print('----------------------------')
+            description=input('Description:')
+            qtype=input('Type:')
+            qtext=input('Question:')
+            lansw=[]
+            again='o'            
+            while again!='n':
+                nextanwser=1
+                rtext=input('Réponse:')
+                fraction=int(input('Fraction:'))
+                lansw.append({'text': rtext, 'fraction' : fraction})
+                again=input('Ajouter une autre réponse? o/n: ')            
+            feedback=input('Aide:')
+            points=float(input('points:'))
+            addQuestion(description, qtext, qtype, lansw, feedback, points)
+            printQuiz()    
+            print(lanw)
         elif addChoice == 2 :
             pass
         elif addChoice == 3 :
@@ -98,14 +119,32 @@ while True :
     elif choice == 2 : # Edit a question
         # display all the questions and answers first
         # then ask for the chosen id
-        # 
-        pass
+        printQuiz()
+        key=input('Entrer l\'id de la question:')
+        printQuizMore(key)       
+        print('Entrer les nouvelles valeurs:')
+        description=input('Description:')
+        qtype=input('Type:')
+        qtext=input('Question:')
+        lansw=[]
+        id=int(key)
+        number=1
+        for elt in range(len(quiz[id]['answers'])):
+            rtext=input('Réponse '+str(number)+':')
+            fraction=int(input('Fraction:'))
+            lansw.append({'text': rtext, 'fraction': fraction})   
+            number+=1                  
+        feedback=input('Aide:')
+        points=float(input('points:'))
+        modifyQuestion(id, description, qtext, qtype, lansw, feedback, points)
+        printQuizPlus(key)
     elif choice == 3 : # Remove a question
-        pass
+        printQuiz()
+        key=int(input('Entrer l\'id de la question:'))
+        deleteQuestion(key)
     elif choice == 4 : # Display chosen questions
         clearScreen()
-        addChoice = displayMenu('Affichage d\'énoncés de questions', 
-                                displayOptions)
+        addChoice = displayMenu('Affichage d\'énoncés de questions', displayOptions)
         if addChoice == 1 : # Display all questions text
             clearScreen()
             print('Affichage de toutes les questions: \n')
