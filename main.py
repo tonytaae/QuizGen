@@ -87,28 +87,7 @@ while True :
         clearScreen()
         choice = showMenu('Ajout d\'une nouvelle question', addOptions)
         if choice == 0 :
-            print('Ajouter une question QCM et toutes les réponses:')
-            print('--------- Exemple ----------')
-            print('Description:Addition \ntype:qcm')
-            print('Question:1+1=? \n     Réponse:2   fraction:50\n     Réponse:3   fraction:0\n     Réponse:2.0 fraction:50')
-            print('Aide: deux\npoint:1')
-            print('----------------------------')
-            description=input('Description:')
-            qtype=input('Type:')
-            qtext=input('Question:')
-            lansw=[]
-            again='o'
-            while again!='n':
-                nextanwser=1
-                rtext=input('Réponse:')
-                fraction=int(input('Fraction:'))
-                lansw.append({'text': rtext, 'fraction' : fraction})
-                again=input('Ajouter une autre réponse? o/n: ')
-            feedback=input('Aide:')
-            points=float(input('points:'))
-            addQuestion(description, qtext, qtype, lansw, feedback, points)
-            printQuiz()
-            print(lanw)
+            addQuestionMain()            
         elif choice == 1 :
             pass
         elif choice == 2 :
