@@ -1,36 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-from menu import *
-from quiz import *
-
-mainOptions = ['Ajouter une nouvelle question',
-               'Modifier une question',
-               'Supprimer une question',
-               'Afficher des questions',
-               'Exporter les questions sous forme de page web',
-               'Enregistrer les changements',
-               'Quitter'
-               ]
-
-addOptions = ['Ajouter une question de type QCM, pour laquelle on saisit'
-              + ' toutes les réponses possibles',
-              'Ajouter une question de type QCM aléatoire portant sur l\'addition et la conversion',
-              'Ajouter une question qui attend la saisie d\'une réponse (non aléatoire)',
-              'Ajouter une question qui attend la saisie d\'une réponse (aléatoire)',
-              'Revenir au menu principal'
-              ]
-
-displayOptions = ['Afficher les énoncés de toutes les questions',
-                  'Choisir des questions',
-                  'Revenir au menu principal'
-                  ]
-
-exportOptions = ['Exporter toutes les questions',
-                 'Choisir des questions',
-                 'Revenir au menu principal'
-                 ]
-
 # Some examples (addQuestion(), modifyQuestion(), deleteQuestion())
 #addQuestion('Conversion de base en base',
 #            'Quelle est la couleur du cheval banc de Henri IV ?',
@@ -77,6 +46,38 @@ exportOptions = ['Exporter toutes les questions',
 #               1
 #               )
 
+from menu import *
+from quiz import *
+
+mainOptions = ['Ajouter une nouvelle question',
+               'Modifier une question',
+               'Supprimer une question',
+               'Afficher des questions',
+               'Exporter les questions sous forme de page web',
+               'Enregistrer les changements',
+               'Quitter'
+               ]
+
+addOptions = ['Ajouter une question de type QCM, pour laquelle on saisit'
+              + ' toutes les réponses possibles',
+              'Ajouter une question de type QCM aléatoire portant sur l\'addition et la conversion',
+              'Ajouter une question qui attend la saisie d\'une réponse (non aléatoire)',
+              'Ajouter une question qui attend la saisie d\'une réponse (aléatoire)',
+              'Revenir au menu principal'
+              ]
+
+displayOptions = ['Afficher les énoncés de toutes les questions',
+                  'Choisir des questions',
+                  'Revenir au menu principal'
+                  ]
+
+exportOptions = ['Exporter toutes les questions',
+                 'Choisir des questions',
+                 'Revenir au menu principal'
+                 ]
+
+# cd Google Drive\Public\Cours\DIU - EIL\GitHub\diueil-bloc1-projet
+
 loadQuizFromFile()
 
 while True :
@@ -87,58 +88,43 @@ while True :
         clearScreen()
         choice = showMenu('Ajout d\'une nouvelle question', addOptions)
         if choice == 0 :
-            addQuestionMain()            
+            clearScreen()
+            addQuestionQcmCloseMain()            
         elif choice == 1 :
             pass
         elif choice == 2 :
-            pass
+            clearScreen()
+            addQuestionOpenCloseMain()
         else : # back to the main menu
             pass
     elif choice == 1 : # Edit a question
         # display all the questions and answers first
         # then ask for the chosen id
-        printQuiz()
-        key=input('Entrer l\'id de la question:')
-        printQuizMore(key)
-        print('Entrer les nouvelles valeurs:')
-        description=input('Description:')
-        qtype=input('Type:')
-        qtext=input('Question:')
-        lansw=[]
-        id=int(key)
-        number=1
-        for elt in range(len(quiz[id]['answers'])):
-            rtext=input('Réponse '+str(number)+':')
-            fraction=int(input('Fraction:'))
-            lansw.append({'text': rtext, 'fraction': fraction})
-            number+=1
-        feedback=input('Aide:')
-        points=float(input('points:'))
-        modifyQuestion(id, description, qtext, qtype, lansw, feedback, points)
-        printQuizPlus(key)
+        clearScreen()
+        modifyQuestionMain()       
     elif choice == 2 : # Remove a question
-        printQuiz()
-        key=int(input('Entrer l\'id de la question:'))
-        deleteQuestion(key)
+        clearScreen()
+        deleteQuestionMain()                
     elif choice == 3 : # Display chosen questions
         choice = showMenu('Affichage d\'énoncés de questions', displayOptions)
         if choice == 0 : # Display all questions text
-            print('Affichage de toutes les questions: \n')
-            printQuiz()
-            input('Appuyer sur une touche')
+            clearScreen()
+            printQuizMain()            
         elif choice == 1 : # Display chosen questions text
             clearScreen()
-            print('Affichage de questions:')
-            print('Utiliser le format suivant pour afficher les questions 1, 2 et 9: 1,8,9')
-            numbers = input('Entrer les numéros:')
-            printQuizPlus(numbers)
-            input('Appuyer sur une touche')
+            printQuizPlusMain()           
         else : # back to the main menu
             pass
     elif choice == 4 : # export questions to web page
         choice = showMenu('Export de questions', exportOptions)
         if choice == 0 : # Export all questions
-            pass
+            clearScreen()
+            print('Exporter toutes les questions:')
+            #sortAllQuestion()
+            printQuiz()
+            printTotalPoint()
+            saveExportQuizToFile(quiz)
+            input('Appuyer sur une touche')
         elif choice == 1 : # Export chosen questions
             pass
         else : # back to the main menu
